@@ -4,7 +4,7 @@ const data = [
     nombre: "Nike Dunk Low Off-White Pine Green",
     precio: "304",
     foto: "https://stockx-360.imgix.net/Nike-Dunk-Low-Off-White-Pine-Green/Images/Nike-Dunk-Low-Off-White-Pine-Green/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1606319825&w=1000",
-    descripcion: "nike Pine Green jjjjjjjjjjjj",
+    descripcion: "nike Pine Green",
     cantidad: "2",
   },
   {

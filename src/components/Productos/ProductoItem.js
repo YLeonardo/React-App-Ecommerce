@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
-export const ProductoItem = ({ id, nombre, descripcion, precio, cantidad, foto }) => {
-
+export const ProductoItem = ({
+  id,
+  nombre,
+  descripcion,
+  precio,
+  cantidad,
+  foto,
+}) => {
   const [modalShow, setModalShow] = useState(false);
 
   function ModalCenter(props) {
@@ -15,15 +21,11 @@ export const ProductoItem = ({ id, nombre, descripcion, precio, cantidad, foto }
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            {nombre}
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">{nombre}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>Descripción:</h4>
-          <p>
-            {descripcion}
-          </p>
+          <p>{descripcion}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide}>Cerrar</Button>
@@ -32,34 +34,25 @@ export const ProductoItem = ({ id, nombre, descripcion, precio, cantidad, foto }
     );
   }
 
-
-
   return (
     <>
-    <div key={id} className="producto">
+      <div key={id} className="producto">
         <div className="producto__img">
           <img src={foto} alt={nombre} />
         </div>
-      <div className="producto__footer">
-        <h1>{nombre}</h1>
-        <p className="precio">${precio} </p>
-        <p className="precio">Disponibles: {cantidad} </p>
+        <div className="producto__footer">
+          <h1>{nombre}</h1>
+          <p className="precio">${precio} </p>
+          <p className="precio">Disponibles: {cantidad} </p>
+        </div>
+        <div className="bottom">
+          <Button className="bn" onClick={() => setModalShow(true)}>
+            Descripción
+          </Button>
+          <Button className="bn">Compra</Button>
+        </div>
+        <ModalCenter show={modalShow} onHide={() => setModalShow(false)} />
       </div>
-      <div className="bottom">
-        <Button className="bn" onClick={() => setModalShow(true)}>
-        Descripción
-        </Button>
-        <Button className="bn">
-        Compra
-        </Button>
-      </div>
-        <ModalCenter
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-    </div>
-
-
     </>
   );
 };

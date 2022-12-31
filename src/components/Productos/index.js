@@ -7,7 +7,6 @@ import { WSClient } from "../../WSClient";
 import Datos from "../../Data";
 
 export const ProductosList = () => {
-
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [productos, setProductos] = useState([]);
@@ -38,7 +37,7 @@ export const ProductosList = () => {
           handleLimpiar();
         }
         var error = JSON.parse(JSON.stringify(result));
-				Swal.fire(error.message, "No se encontró alguna coincidencia", "error");
+        Swal.fire(error.message, "No se encontró alguna coincidencia", "error");
       }
     );
   }
