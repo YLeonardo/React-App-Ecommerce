@@ -27,14 +27,10 @@ export const ProductosDetalles = () => {
   console.log(url);
 
   useEffect(() => {
-    const values = `${detalle.img1}${url}${detalle.img2}`;
+    const values = `${detalle.foto}`;
     setImages(values);
   }, [url, params.id]);
 
-  const handleInput = (e) => {
-    const number = e.target.value.toString().padStart(2, "01");
-    setUrl(number);
-  };
 
   if (detalle.length < 1) return null;
 
@@ -49,14 +45,6 @@ export const ProductosDetalles = () => {
           ) : (
             <img src={detalle.foto} alt={detalle.nombre} />
           )}
-          <input
-            type="range"
-            min="1"
-            max="36"
-            step="1"
-            value={url}
-            onChange={handleInput}
-          />
 
           <div className="description">
             <p className="price">${detalle.precio}</p>
@@ -68,17 +56,16 @@ export const ProductosDetalles = () => {
               <b>{detalle.descripcion}</b>
             </p>
             <br></br>
-            <br></br>
             <button onClick={() => addCarrito(detalle.id)}>
               Añadir al carrito
             </button>
           </div>
         </div>
       }
-      <h2 className="relacionados">Productos relacionados</h2>
+      <h2 className="relacionados">Productos Relacionados</h2>
       <div className="productos">
         {productos.map((producto) => {
-          if (item < 6 && detalle.descripcion === producto.descripcion && producto.cantidad >= 1) {
+          if (item < 6 && producto.cantidad >= 1) {
             item++;
             return (
               <ProductoItem
