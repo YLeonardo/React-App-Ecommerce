@@ -42,32 +42,12 @@ export const ProductosDetalles = () => {
     <>
       {
         <div className="detalles">
-          <h2>{detalle.title}</h2>
-          <p className="price">${detalle.price}</p>
-          <div className="grid">
-            <p className="nuevo">Nuevo</p>
-            <div className="tamano">
-              <select placeholder="Tamaño">
-                <option value="1">1</option>
-                <option value="1">2</option>
-                <option value="1">3</option>
-                <option value="1">4</option>
-                <option value="1">5</option>
-                <option value="1">6</option>
-                <option value="1">7</option>
-                <option value="1">8</option>
-              </select>
-              <p>Tamaño</p>
-            </div>
-          </div>
-          <button onClick={() => addCarrito(detalle.id)}>
-            Añadir al carrito
-          </button>
+          <h2>{detalle.nombre}</h2>
 
           {url ? (
-            <img src={images} alt={detalle.title} />
+            <img src={images} alt={detalle.nombre} />
           ) : (
-            <img src={detalle.image} alt={detalle.title} />
+            <img src={detalle.foto} alt={detalle.nombre} />
           )}
           <input
             type="range"
@@ -77,38 +57,38 @@ export const ProductosDetalles = () => {
             value={url}
             onChange={handleInput}
           />
+
           <div className="description">
+            <p className="price">${detalle.precio}</p>
+            <div className="grid"></div>
+
             <p>
-              <b>description: </b> Lorem ipsum dolor, sit amet consectetur
-              adipisicing elit. Cum necessitatibus soluta alias porro, saepe
-              facere expedita asperiores quos fugit inventore ex, itaque
-              sapiente quae pariatur beatae optio repellat aperiam quia possimus
-              mollitia repellendus? Illo natus quam eaque impedit omnis
-              pariatur!
+              <h3>Descripción: </h3>
+              <br></br>
+              <b>{detalle.descripcion}</b>
             </p>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              vitae accusantium omnis, facere laudantium ipsa hic reprehenderit
-              blanditiis quibusdam quos repellendus id illo reiciendis magni,
-              aliquid beatae, consequatur sapiente! Sequi facere itaque,
-            </p>
+            <br></br>
+            <br></br>
+            <button onClick={() => addCarrito(detalle.id)}>
+              Añadir al carrito
+            </button>
           </div>
         </div>
       }
       <h2 className="relacionados">Productos relacionados</h2>
       <div className="productos">
         {productos.map((producto) => {
-          if (item < 6 && detalle.category === producto.category) {
+          if (item < 6 && detalle.descripcion === producto.descripcion && producto.cantidad >= 1) {
             item++;
             return (
               <ProductoItem
                 key={producto.id}
-                title={producto.title}
-                image={producto.image}
-                category={producto.category}
-                price={producto.price}
                 id={producto.id}
+                nombre={producto.nombre}
+                descripcion={producto.descripcion}
+                precio={producto.precio}
+                cantidad={producto.cantidad}
+                foto={producto.foto}
               />
             );
           }

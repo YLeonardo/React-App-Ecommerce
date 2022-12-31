@@ -60,10 +60,10 @@ export const Carrito = () => {
             <>
               {carrito.map((producto) => (
                 <div className="carrito__item" key={producto.id}>
-                  <img src={producto.image} alt={producto.title} />
+                  <img src={producto.foto} alt={producto.nombre} />
                   <div>
-                    <h3> {producto.title} </h3>
-                    <p className="price">${producto.price}</p>
+                    <h3> {producto.nombre} </h3>
+                    <p className="price">${producto.precio}</p>
                   </div>
                   <div>
                     <box-icon

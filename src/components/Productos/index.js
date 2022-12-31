@@ -1,66 +1,82 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { DataContext } from "context/DataProvider";
 import { ProductoItem } from "./ProductoItem";
 import ProductoCaja from "../../images/agregar_producto.png";
+import Swal from "sweetalert2";
 import { WSClient } from "../../WSClient";
-
 
 export const ProductosList = () => {
   const value = useContext(DataContext);
   const [productos] = value.productos;
 
-  const URL = "../../Servicio/rest/ws";
-  const foto = null; // por default la foto es nula
+  const [nombre, setNombre] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  //const [productos, setProductos] = useState("");
 
-  function get(id) {
-    return document.getElementById(id);
-  }
+  const [foto, setFoto] = useState(null);
+
+  const handleLimpiar = () => {
+    setNombre("");
+    setDescripcion("");
+    setFoto(null);
+  };
 
   function consulta() {
+    const URL = "../../Servicio/rest/ws";
     const producto = new WSClient(URL);
     producto.postJson(
       "consulta_articulo",
       {
-        // se debe pasar como parametro el nombre y descripción del articulo a consultar
-        // si el articulo no existe regresa un error
-        nombre: get("consulta_nombre").value,
-        descripcion: get("consulta_descripcion").value,
+        nombre,
+        descripcion,
       },
       function (code, result) {
         if (code == 200) {
-          //Lugar donde se pone la respuesta de consulta
+          // setProductos(result);
 
-          const descripcionProducto = result.descripcion;
-          get("consulta_nombre").value = result.nombre;
-          get("consulta_precio").value = result.apellido_paterno;
-          foto = result.foto;
-          get("consulta_imagen").src =
-            foto != null ? "data:image/jpeg;base64," + foto : { ProductoCaja };
-
-          get("consulta_nombre").readOnly = true;
+          Swal.fire("El artículo se capturó correctamente", "", "success");
+          handleLimpiar();
         }
-        // el objeto "result" es de tipo Error
-        else alert(JSON.stringify(result));
+        var error = JSON.parse(JSON.stringify(result));
+				Swal.fire(error.message, "No se encontró alguna coincidencia", "error");
       }
     );
   }
 
   return (
     <>
-    <h1 className="produ">CONSULTA DE ARTÍCULO</h1>
+      <h1 className="produ">CONSULTA DE ARTÍCULO</h1>
       <Form className="form-captura">
         <Form.Group className="mb-3">
           <Form.Label>Nombre *</Form.Label>
-          <Form.Control type="text" placeholder="" id="consulta_nombre" />
+          <Form.Control
+            type="text"
+            id="consulta_nombre"
+            name="nombre"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+          />
           <Form.Label>Descripción *</Form.Label>
-          <Form.Control type="text" placeholder="" id="consulta_descripcion" />
+          <Form.Control
+            type="text"
+            placeholder=""
+            id="consulta_descripcion"
+            name="descripcion"
+            value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
+          />
         </Form.Group>
         <div className="d-grid gap-2 mb-auto">
-        <Button onclick={() => consulta()} variant="primary" type="button" size="lg">
-          Buscar artículo
-        </Button>
+          <Button
+            onclick={() => consulta()}
+            variant="primary"
+            type="button"
+            size="lg"
+          >
+            Buscar artículo
+          </Button>
         </div>
       </Form>
       <h1 className="hi-alta">PRODUCTOS</h1>
@@ -68,15 +84,21 @@ export const ProductosList = () => {
         {productos.map((producto) => (
           <ProductoItem
             key={producto.id}
-            title={producto.title}
-            image={producto.image}
-            category={producto.category}
-            price={producto.price}
             id={producto.id}
+            nombre={producto.nombre}
+            descripcion={producto.descripcion}
+            precio={producto.precio}
+            cantidad={producto.cantidad}
+            foto={producto.foto}
           />
         ))}
       </div>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
     </>
   );
 };
