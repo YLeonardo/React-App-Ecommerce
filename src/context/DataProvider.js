@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import Data from "Data2.js";
+import Data from "Data.js";
 
 export const DataContext = createContext();
 
@@ -47,7 +47,7 @@ export const DataProvider = (props) => {
   useEffect(() => {
     const getTotal = () => {
       const res = carrito.reduce((prev, item) => {
-        return prev + item.price * item.cantidad;
+        return prev + item.precio * item.cantidad;
       }, 0);
       setTotal(res);
     };

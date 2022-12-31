@@ -181,14 +181,15 @@ footer {
     grid-template-columns: 2fr 1fr;
     gap: 1rem 2rem;
 }
-.bottom .btn{
+.bottom .bn{
     border: none;
     outline: 0;
     cursor: pointer;
     border-radius: 5px;
 }
+
 .bottom button{
-    background-color: #3033d3;
+    background-color:#003cff;
     max-width: 250px;
     width: 100%;
     margin: 0 auto;

@@ -3,24 +3,25 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { DataContext } from "context/DataProvider";
 import { ProductoItem } from "./ProductoItem";
-import ProductoCaja from "../../images/agregar_producto.png";
 import Swal from "sweetalert2";
 import { WSClient } from "../../WSClient";
+import Datos from "../../Data";
 
 export const ProductosList = () => {
   const value = useContext(DataContext);
-  const [productos] = value.productos;
+  //const [productos] = value.productos;
 
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  //const [productos, setProductos] = useState("");
-
-  const [foto, setFoto] = useState(null);
+  const [productos, setProductos] = useState([]);
 
   const handleLimpiar = () => {
     setNombre("");
     setDescripcion("");
-    setFoto(null);
+  };
+
+  const pruebaConsulta = () => {
+    setProductos(Datos);
   };
 
   function consulta() {
@@ -34,7 +35,7 @@ export const ProductosList = () => {
       },
       function (code, result) {
         if (code == 200) {
-          // setProductos(result);
+          setProductos(result);
 
           Swal.fire("El artículo se capturó correctamente", "", "success");
           handleLimpiar();
@@ -70,7 +71,7 @@ export const ProductosList = () => {
         </Form.Group>
         <div className="d-grid gap-2 mb-auto">
           <Button
-            onclick={() => consulta()}
+            onClick={() => pruebaConsulta()}
             variant="primary"
             type="button"
             size="lg"
