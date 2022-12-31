@@ -146,6 +146,7 @@ footer {
     border: 6px solid transparent;
     cursor: pointer;
     border-radius: 5px;
+    margin-left: 30px;
 }
 .producto:hover{
     border: 6px solid #083da057;
@@ -198,11 +199,12 @@ footer {
     font-weight: 600;
 }
 .bottom div{
-    background-color:#08a05c;
+    background-color: #1170dd50;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 10px 10px #1170dd50;
     display: grid;
     align-items: center;
     text-align: center;
-    margin-left: -2rem;
     border-radius: 5px;
 }
 .bottom div a{

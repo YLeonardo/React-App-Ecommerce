@@ -1,33 +1,33 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { DataContext } from "context/DataProvider";
+import React, { useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+
 
 export const ProductoItem = ({ id, nombre, descripcion, precio, cantidad, foto }) => {
-  const value = useContext(DataContext);
-  const addCarrito = value.addCarrito;
+
+  const [datosId, setDatosId] = useState("");
 
   return (
+    <>
     <div key={id} className="producto">
-      <Link to={`/producto/${id}`}>
         <div className="producto__img">
           <img src={foto} alt={nombre} />
         </div>
-      </Link>
       <div className="producto__footer">
         <h1>{nombre}</h1>
         <p className="precio">${precio} </p>
         <p className="precio">Disponibles: {cantidad} </p>
       </div>
       <div className="bottom">
-        <button onClick={() => addCarrito(id)} className="bn">
-          Compra
-        </button>
-        <div>
-          <Link to={`/producto/${id}`} className="bn">
-            Descripción
-          </Link>
-        </div>
+        <Button className="bn">
+        Descripción
+        </Button>
+        <Button className="bn">
+        Compra
+        </Button>
       </div>
     </div>
+    </>
+    
   );
 };

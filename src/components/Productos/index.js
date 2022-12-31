@@ -1,15 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { DataContext } from "context/DataProvider";
 import { ProductoItem } from "./ProductoItem";
 import Swal from "sweetalert2";
 import { WSClient } from "../../WSClient";
 import Datos from "../../Data";
 
 export const ProductosList = () => {
-  const value = useContext(DataContext);
-  //const [productos] = value.productos;
 
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
