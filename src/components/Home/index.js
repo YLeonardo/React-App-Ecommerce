@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Portada from "images/Jordan3.png";
+import Portada from "images/dunks-panda.png";
 
 export default function Inicio() {
   return (
