@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { ProductoItem } from "./ProductoItem";
 import Swal from "sweetalert2";
 import { WSClient } from "../../WSClient";
+import Datos from "../../Data";
 
 export const ProductosList = () => {
   const [nombre, setNombre] = useState("");
@@ -15,8 +16,12 @@ export const ProductosList = () => {
     setDescripcion("");
   };
 
+  const pruebaConsulta = () => {
+    setProductos(Datos);
+  };
+
   function consulta() {
-    const URL = "../../Servicio/rest/ws";
+    const URL = "../../api";
     const producto = new WSClient(URL);
     producto.postJson(
       "consulta_articulo",
@@ -62,7 +67,7 @@ export const ProductosList = () => {
         </Form.Group>
         <div className="d-grid gap-2 mb-auto">
           <Button
-            onClick={() => consulta()}
+            onClick={() => pruebaConsulta()}
             variant="primary"
             type="button"
             size="lg"

@@ -1,4 +1,3 @@
-
 /*
 
 	WSClient.js
@@ -26,7 +25,37 @@
 function WSClient(url)
 {
 	this.url = url;
-	
+	this.postUrl = function(operation,args,callback)
+	{
+		var request = new XMLHttpRequest();
+		var body = "";
+		var pairs = [];
+		var name;
+		try
+		{
+			for (name in args)
+			{
+				var value = args[name];
+				if (typeof value !== "string") value = JSON.stringify(value);
+				pairs.push(name + '=' + encodeURI(value).replace(/=/g,'%3D').replace(/&/g,'%26').replace(/%20/g,'+'));
+			}
+			body = pairs.join('&');
+			request.open('POST', url + '/' + operation);
+			request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			request.setRequestHeader('Content-Length',body.length);
+			request.responseType = 'json';
+			request.onload = function()
+			{
+				if (callback != null) callback(request.status,resolveReferences(request.response));
+			}
+			request.send(body);
+		}
+		catch (e)
+		{
+			alert("Error: " + e.message);
+		}
+	}
+
 	this.postJson = function(operacion,args,callback)
 	{
 		try
@@ -39,7 +68,6 @@ function WSClient(url)
 			request.onload = function()
 			{
 				if (callback != null) callback(request.status,request.response);
-				/* if (callback != null) callback(request.status,resolveReferences(request.response)); */
 			};
 			request.send(body);
 		}

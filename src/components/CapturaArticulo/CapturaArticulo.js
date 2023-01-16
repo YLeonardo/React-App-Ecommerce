@@ -43,7 +43,7 @@ export const CapturaArticulo = () => {
 
   function alta(e) {
     e.preventDefault();
-    const URL = "../../Servicio/rest/ws";
+    const URL = "../../api";
     var producto = new WSClient(URL);
     var articulo = {
       nombre,
