@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import Data from "Data.js";
 
 export const DataContext = createContext();
 
@@ -10,6 +11,14 @@ export const DataProvider = (props) => {
 
   console.log(carrito);
 
+  useEffect(() => {
+    const producto = Data.items;
+    if (producto) {
+      setProductos(producto);
+    } else {
+      setProductos([]);
+    }
+  }, []);
 
   const addCarrito = (id) => {
     const check = carrito.every((item) => {
