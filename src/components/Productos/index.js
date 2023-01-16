@@ -4,7 +4,6 @@ import Form from "react-bootstrap/Form";
 import { ProductoItem } from "./ProductoItem";
 import Swal from "sweetalert2";
 import { WSClient } from "../../WSClient";
-import Datos from "../../Data";
 
 export const ProductosList = () => {
   const [nombre, setNombre] = useState("");
@@ -14,10 +13,6 @@ export const ProductosList = () => {
   const handleLimpiar = () => {
     setNombre("");
     setDescripcion("");
-  };
-
-  const pruebaConsulta = () => {
-    setProductos(Datos);
   };
 
   function consulta() {
@@ -67,7 +62,7 @@ export const ProductosList = () => {
         </Form.Group>
         <div className="d-grid gap-2 mb-auto">
           <Button
-            onClick={() => pruebaConsulta()}
+            onClick={() => consulta()}
             variant="primary"
             type="button"
             size="lg"
